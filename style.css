@@ -1,70 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap');
+
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #1e1e2f, #2c2c3f);
-  color: #fff;
-  font-family: 'Segoe UI', sans-serif;
+  background: #1a1a1a; /* Dunkler Hintergrund für Eleganz */
+  color: #f5f0e6; /* Cremefarben für Text */
+  font-family: 'Noto Serif SC', serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   text-align: center;
+  background-image:
+    radial-gradient(circle at top left, rgba(193, 39, 45, 0.15), transparent 70%),
+    radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.15), transparent 70%);
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 3rem;
+  margin-bottom: 25px;
+  color: #c1272d; /* traditionelles Rot */
+  text-shadow: 0 0 8px #d4af37; /* goldener Schein */
+  letter-spacing: 3px;
 }
 
 #countdown {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 }
 
 .time-box {
-  background: #3a3a5a;
-  border-radius: 20px;
-  padding: 20px 30px;
-  min-width: 120px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  background: #c1272d; /* kräftiges Rot */
+  border-radius: 15px;
+  padding: 25px 40px;
+  min-width: 130px;
+  box-shadow: 0 0 20px #d4af37; /* goldener Glanz */
+  border: 3px solid #d4af37; /* goldener Rahmen */
+  font-weight: bold;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.time-box:hover {
+  transform: scale(1.05);
 }
 
 .time-box span {
   display: block;
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 3rem;
+  line-height: 1;
+  color: #f5f0e6;
+  font-family: 'Noto Serif SC', serif;
 }
 
 .label {
-  font-size: 1rem;
-  color: #bbbbcc;
-  margin-top: 5px;
+  font-size: 1.2rem;
+  color: #f5f0e6;
+  margin-top: 10px;
+  letter-spacing: 2px;
 }
 
 p {
-  font-size: 1.2rem;
-  margin-top: 30px;
-  color: #ccc;
+  font-size: 1.5rem;
+  margin-top: 35px;
+  color: #d4af37;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 1.5px;
 }
 
 @media (max-width: 600px) {
   h1 {
-    font-size: 1.8rem;
-  }
-
-  .time-box {
-    min-width: 90px;
-    padding: 15px 20px;
-  }
-
-  .time-box span {
     font-size: 2rem;
   }
 
+  .time-box {
+    min-width: 100px;
+    padding: 18px 25px;
+  }
+
+  .time-box span {
+    font-size: 2.2rem;
+  }
+
   p {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
