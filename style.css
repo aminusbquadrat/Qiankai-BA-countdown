@@ -1,16 +1,15 @@
-/* Basis & Body */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
   margin: 0;
   padding: 0;
-  background: #0b0c10; /* sehr dunkles Nachtblau/Schwarz */
-  color: #00ffe7; /* Neon-Türkis */
+  background: #0b0c10;
+  color: #00ffe7;
   font-family: 'Orbitron', monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Content oben ansetzen */
+  justify-content: flex-start;
   min-height: 100vh;
   text-align: center;
   text-shadow:
@@ -19,7 +18,6 @@ body {
     0 0 30px #00ffe7;
 }
 
-/* Feuerwerk-Canvas */
 #fireworks {
   position: fixed;
   top: 0;
@@ -31,17 +29,15 @@ body {
   background: transparent;
 }
 
-/* Content über dem Canvas */
 body > *:not(#fireworks) {
   position: relative;
   z-index: 1;
 }
 
-/* Überschrift */
 h1 {
   font-size: 3rem;
-  margin: 25px 0 25px 0;
-  color: #ff00ff; /* Neon-Pink */
+  margin: 25px 0;
+  color: #ff00ff;
   text-shadow:
     0 0 15px #ff00ff,
     0 0 30px #ff00ff,
@@ -49,7 +45,6 @@ h1 {
   letter-spacing: 3px;
 }
 
-/* Container für Countdown und Bilder */
 .container {
   display: flex;
   align-items: center;
@@ -60,7 +55,6 @@ h1 {
   z-index: 1;
 }
 
-/* Bilder links und rechts */
 .side-image {
   width: 120px;
   height: auto;
@@ -69,19 +63,16 @@ h1 {
   transition: transform 0.3s ease;
 }
 
-/* Linkes Bild: -20° + horizontal gespiegelt + Neon-Pink Schatten */
 .side-image.left {
   transform: rotate(-20deg) scaleX(-1);
   filter: drop-shadow(0 0 10px #ff00ff);
 }
 
-/* Rechtes Bild: 20° gedreht + Neon-Türkis Schatten */
 .side-image.right {
   transform: rotate(20deg);
   filter: drop-shadow(0 0 10px #00ffe7);
 }
 
-/* Countdown Boxen */
 #countdown {
   display: flex;
   justify-content: center;
@@ -124,15 +115,26 @@ h1 {
   letter-spacing: 2px;
 }
 
-/* Text unter Countdown */
-p {
-  font-size: 1.6rem;
-  margin-top: 35px;
-  color: #ff00ffcc;
-  letter-spacing: 1.5px;
+/* Text für Abgelaufen */
+.expired {
+  font-size: 2rem;
+  color: #ff0033;
+  text-shadow:
+    0 0 10px #ff0033,
+    0 0 20px #ff0033;
+  margin-top: 40px;
 }
 
-/* Responsive Anpassungen */
+.caption {
+  margin: 25px 0;
+  font-size: 1.8rem;
+}
+
+.caption.bottom {
+  margin-top: 35px;
+  color: #ff00ffcc;
+}
+
 @media (max-width: 600px) {
   h1 {
     font-size: 2rem;
@@ -160,7 +162,11 @@ p {
     font-size: 1rem;
   }
 
-  p {
+  .caption {
     font-size: 1.2rem;
+  }
+
+  .expired {
+    font-size: 1.5rem;
   }
 }
