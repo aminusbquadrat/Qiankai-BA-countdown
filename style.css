@@ -1,115 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap');
-
-#fireworks {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none; /* Keine Maus-Interaktion */
-  z-index: 0;
-  background: transparent;
-}
-
-body > *:not(#fireworks) {
-  position: relative;
-  z-index: 1;}
-body{
+body {
   margin: 0;
   padding: 0;
-  background: #1a1a1a; /* Dunkler Hintergrund für Eleganz */
-  color: #f5f0e6; /* Cremefarben für Text */
-  font-family: 'Noto Serif SC', serif;
+  background: #0b0c10; /* sehr dunkles Nachtblau/Schwarz */
+  color: #00ffe7; /* Neon-Türkis */
+  font-family: 'Orbitron', monospace;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   text-align: center;
-  background-image:
-    radial-gradient(circle at top left, rgba(193, 39, 45, 0.15), transparent 70%),
-    radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.15), transparent 70%);
+  text-shadow:
+    0 0 10px #00ffe7,
+    0 0 20px #00ffe7,
+    0 0 30px #00ffe7;
 }
 
 h1 {
   font-size: 3rem;
   margin-bottom: 25px;
-  color: #c1272d; /* traditionelles Rot */
-  text-shadow: 0 0 8px #d4af37; /* goldener Schein */
+  color: #ff00ff; /* Neon-Pink */
+  text-shadow:
+    0 0 15px #ff00ff,
+    0 0 30px #ff00ff,
+    0 0 45px #ff00ff;
   letter-spacing: 3px;
 }
 
 #countdown {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
+  gap: 40px;
+  flex-wrap: wrap;
+  z-index: 1;
 }
 
 .time-box {
-  background: #c1272d; /* kräftiges Rot */
-  border-radius: 15px;
-  padding: 25px 40px;
-  min-width: 130px;
-  box-shadow: 0 0 20px #d4af37; /* goldener Glanz */
-  border: 3px solid #d4af37; /* goldener Rahmen */
-  font-weight: bold;
-  user-select: none;
+  background: rgba(255, 0, 255, 0.1);
+  border: 2px solid #ff00ff;
+  border-radius: 20px;
+  padding: 25px 45px;
+  min-width: 140px;
+  box-shadow:
+    0 0 15px #ff00ff,
+    inset 0 0 10px #ff00ff;
   transition: transform 0.3s ease;
+  user-select: none;
 }
 
 .time-box:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
+  box-shadow:
+    0 0 25px #ff00ff,
+    inset 0 0 15px #ff00ff;
 }
 
 .time-box span {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #00ffe7;
   display: block;
-  font-size: 3rem;
-  line-height: 1;
-  color: #f5f0e6;
-  font-family: 'Noto Serif SC', serif;
 }
 
 .label {
-  font-size: 1.2rem;
-  color: #f5f0e6;
-  margin-top: 10px;
+  font-size: 1.3rem;
+  color: #00ffe7cc;
+  margin-top: 12px;
   letter-spacing: 2px;
 }
 
 p {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-top: 35px;
-  color: #d4af37;
-  font-family: 'Noto Serif SC', serif;
+  color: #ff00ffcc;
   letter-spacing: 1.5px;
-}
-
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .time-box {
-    min-width: 100px;
-    padding: 18px 25px;
-  }
-
-  .time-box span {
-    font-size: 2.2rem;
-  }
-
-  p {
-    font-size: 1.1rem;
-  }
 }
 
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px;
-  margin-bottom: 30px;
+  gap: 50px;
+  margin-bottom: 40px;
   position: relative;
   z-index: 1;
 }
@@ -122,37 +94,44 @@ p {
   transition: transform 0.3s ease;
 }
 
-/* Links: ca. 20° drehen + horizontal spiegeln */
 .side-image.left {
   transform: rotate(-20deg) scaleX(-1);
+  filter: drop-shadow(0 0 10px #ff00ff);
 }
 
-/* Rechts: ca. 20° drehen */
 .side-image.right {
   transform: rotate(20deg);
+  filter: drop-shadow(0 0 10px #00ffe7);
 }
 
 @media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
   .container {
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
   }
 
   .side-image {
-    width: 80px;
+    width: 90px;
+  }
+
+  .time-box {
+    min-width: 100px;
+    padding: 18px 30px;
+  }
+
+  .time-box span {
+    font-size: 2.5rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
   }
 }
-
-
-/* Responsive: kleiner auf kleinen Bildschirmen */
-@media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .side-image {
-    width: 80px;
-  }
-}
-
