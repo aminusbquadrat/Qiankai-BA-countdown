@@ -64,6 +64,127 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
+  <script>
+(() => {
+  const canvas = document.getElementById('fireworks');
+  const ctx = canvas.getContext('2d');
+
+  let W, H;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor(x, y, color) {
+      this.x = x;
+      this.y = y;
+      this.color = color;
+      this.radius = Math.random() * 3 + 2;
+      this.speedX = (Math.random() - 0.5) * 6;
+      this.speedY = (Math.random() - 0.5) * 6;
+      this.alpha = 1;
+      this.gravity = 0.05;
+      this.friction = 0.98;
+    }
+
+    update() {
+      this.speedX *= this.friction;
+      this.speedY *= this.friction;
+      this.speedY += this.gravity;
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.alpha -= 0.015;
+      if(this.alpha < 0) this.alpha = 0;
+    }
+
+    draw(ctx) {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.beginPath();
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 10;
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  class Firework {
+    constructor() {
+      this.x = Math.random() * W * 0.8 + W * 0.1;
+      this.y = H;
+      this.targetY = Math.random() * H * 0.5 + H * 0.1;
+      this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      this.speedY = - (Math.random() * 7 + 7);
+      this.particles = [];
+      this.exploded = false;
+    }
+
+    update() {
+      if (!this.exploded) {
+        this.y += this.speedY;
+        this.speedY += 0.15; // gravity effect up
+        if (this.y <= this.targetY) {
+          this.exploded = true;
+          for (let i = 0; i < 40; i++) {
+            this.particles.push(new Particle(this.x, this.y, this.color));
+          }
+        }
+      } else {
+        this.particles.forEach(p => p.update());
+        this.particles = this.particles.filter(p => p.alpha > 0);
+      }
+    }
+
+    draw(ctx) {
+      if (!this.exploded) {
+        ctx.save();
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 10;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      } else {
+        this.particles.forEach(p => p.draw(ctx));
+      }
+    }
+
+    done() {
+      return this.exploded && this.particles.length === 0;
+    }
+  }
+
+  let fireworks = [];
+  let lastLaunch = 0;
+
+  function animate(time=0) {
+    ctx.clearRect(0, 0, W, H);
+
+    if (time - lastLaunch > 800) { // alle 0.8 Sekunden neues Feuerwerk
+      fireworks.push(new Firework());
+      lastLaunch = time;
+    }
+
+    fireworks.forEach(fw => {
+      fw.update();
+      fw.draw(ctx);
+    });
+
+    fireworks = fireworks.filter(fw => !fw.done());
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+</script>
+
 </body>
 </html>
 
