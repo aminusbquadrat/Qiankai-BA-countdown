@@ -104,33 +104,45 @@ p {
   }
 }
 
-/* Container um Countdown + Bilder anzuordnen */
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 40px;
   margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Gemeinsame Styles für die Bilder */
 .side-image {
-  width: 120px; /* Größe anpassen */
+  width: 120px;
   height: auto;
   object-fit: contain;
-  transition: transform 0.3s ease;
   user-select: none;
+  transition: transform 0.3s ease;
 }
 
-/* Links: 45° drehen + horizontal spiegeln */
+/* Links: ca. 20° drehen + horizontal spiegeln */
 .side-image.left {
-  transform: rotate(45deg) scaleX(-1);
+  transform: rotate(20deg) scaleX(-1);
 }
 
-/* Rechts: 45° drehen normal */
+/* Rechts: ca. 20° drehen */
 .side-image.right {
-  transform: rotate(45deg);
+  transform: rotate(20deg);
 }
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .side-image {
+    width: 80px;
+  }
+}
+
 
 /* Responsive: kleiner auf kleinen Bildschirmen */
 @media (max-width: 600px) {
