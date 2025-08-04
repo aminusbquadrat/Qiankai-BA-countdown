@@ -89,3 +89,44 @@ p {
     font-size: 1.1rem;
   }
 }
+
+/* Container um Countdown + Bilder anzuordnen */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+/* Gemeinsame Styles für die Bilder */
+.side-image {
+  width: 120px; /* Größe anpassen */
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+
+/* Links: 45° drehen + horizontal spiegeln */
+.side-image.left {
+  transform: rotate(45deg) scaleX(-1);
+}
+
+/* Rechts: 45° drehen normal */
+.side-image.right {
+  transform: rotate(45deg);
+}
+
+/* Responsive: kleiner auf kleinen Bildschirmen */
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .side-image {
+    width: 80px;
+  }
+}
+
