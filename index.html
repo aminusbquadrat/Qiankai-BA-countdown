@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <audio src="Europe - The Final Countdown (Lyrics).mp3" autoplay loop></audio>
   <canvas id="fireworks"></canvas>
 
   <div class="container">
@@ -29,5 +28,21 @@
 
   <script src="countdown.js"></script>
   <script src="fireworks.js"></script>
+  <script>
+  const audio = new Audio("deine-musikdatei.mp3");
+  audio.loop = true;
+
+  // Warte, bis die Metadaten geladen sind (damit currentTime gesetzt werden kann)
+  audio.addEventListener('loadedmetadata', () => {
+    audio.currentTime = 56;
+    audio.play().catch(() => {
+      // Autoplay evtl. blockiert - du kannst hier optional was machen oder leise bleiben
+      console.log("Autoplay blockiert, bitte starte die Musik manuell.");
+    });
+  });
+
+  // Laden starten
+  audio.load();
+</script>
 </body>
 </html>
