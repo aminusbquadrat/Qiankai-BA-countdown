@@ -1,191 +1,46 @@
 <!DOCTYPE html>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-
-
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Qiankai's Bachelor Countdown</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <title>Qiankai BA Countdown</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <canvas id="fireworks"></canvas>
-
-  <h1>Qiankai hat noch</h1>
-
   <div class="container">
-    <img src="qiankai.png" alt="Links Bild" class="side-image left" />
-    <div id="countdown">
-      <div class="time-box">
-        <span id="days">0</span>
-        <div class="label">Tage</div>
+    <h1 class="title">Qiankai hat noch</h1>
+
+    <div class="countdown-wrapper">
+      <img src="images/qiankai.png" alt="Qiankai links" class="side-image left" />
+      
+      <div class="countdown" id="countdown">
+        <div class="time">
+          <span id="days">00</span>
+          <span class="label">Tage</span>
+        </div>
+        <div class="time">
+          <span id="hours">00</span>
+          <span class="label">Stunden</span>
+        </div>
+        <div class="time">
+          <span id="minutes">00</span>
+          <span class="label">Minuten</span>
+        </div>
+        <div class="time">
+          <span id="seconds">00</span>
+          <span class="label">Sekunden</span>
+        </div>
       </div>
-      <div class="time-box">
-        <span id="hours">0</span>
-        <div class="label">Stunden</div>
-      </div>
-      <div class="time-box">
-        <span id="minutes">0</span>
-        <div class="label">Minuten</div>
-      </div>
-      <div class="time-box">
-        <span id="seconds">0</span>
-        <div class="label">Sekunden</div>
-      </div>
+
+      <img src="images/qiankai.png" alt="Qiankai rechts" class="side-image right" />
     </div>
-    <img src="qiankai.png" alt="Rechts Bild" class="side-image right" />
+
+    <p class="subtitle">um seine Bachelorarbeit abzugeben</p>
   </div>
 
-  <p>um seine Bachelorarbeit abzugeben</p>
+  <canvas id="fireworks-canvas"></canvas>
 
-  <script>
-    function updateCountdown() {
-      const deadline = new Date("2026-02-29T23:59:59");
-      const now = new Date();
-      const diff = deadline - now;
-
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "KEINE ZEIT MEHR!";
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  </script>
-  <script>
-(() => {
-  const canvas = document.getElementById('fireworks');
-  const ctx = canvas.getContext('2d');
-
-  let W, H;
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  class Particle {
-    constructor(x, y, color) {
-      this.x = x;
-      this.y = y;
-      this.color = color;
-      this.radius = Math.random() * 3 + 2;
-      this.speedX = (Math.random() - 0.5) * 6;
-      this.speedY = (Math.random() - 0.5) * 6;
-      this.alpha = 1;
-      this.gravity = 0.05;
-      this.friction = 0.98;
-    }
-
-    update() {
-      this.speedX *= this.friction;
-      this.speedY *= this.friction;
-      this.speedY += this.gravity;
-      this.x += this.speedX;
-      this.y += this.speedY;
-      this.alpha -= 0.015;
-      if(this.alpha < 0) this.alpha = 0;
-    }
-
-    draw(ctx) {
-      ctx.save();
-      ctx.globalAlpha = this.alpha;
-      ctx.beginPath();
-      ctx.fillStyle = this.color;
-      ctx.shadowColor = this.color;
-      ctx.shadowBlur = 10;
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  class Firework {
-    constructor() {
-      this.x = Math.random() * W * 0.8 + W * 0.1;
-      this.y = H;
-      this.targetY = Math.random() * H * 0.5 + H * 0.1;
-      this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
-      this.speedY = - (Math.random() * 7 + 7);
-      this.particles = [];
-      this.exploded = false;
-    }
-
-    update() {
-      if (!this.exploded) {
-        this.y += this.speedY;
-        this.speedY += 0.15; // gravity effect up
-        if (this.y <= this.targetY) {
-          this.exploded = true;
-          for (let i = 0; i < 40; i++) {
-            this.particles.push(new Particle(this.x, this.y, this.color));
-          }
-        }
-      } else {
-        this.particles.forEach(p => p.update());
-        this.particles = this.particles.filter(p => p.alpha > 0);
-      }
-    }
-
-    draw(ctx) {
-      if (!this.exploded) {
-        ctx.save();
-        ctx.fillStyle = this.color;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      } else {
-        this.particles.forEach(p => p.draw(ctx));
-      }
-    }
-
-    done() {
-      return this.exploded && this.particles.length === 0;
-    }
-  }
-
-  let fireworks = [];
-  let lastLaunch = 0;
-
-  function animate(time=0) {
-    ctx.clearRect(0, 0, W, H);
-
-    if (time - lastLaunch > 800) { // alle 0.8 Sekunden neues Feuerwerk
-      fireworks.push(new Firework());
-      lastLaunch = time;
-    }
-
-    fireworks.forEach(fw => {
-      fw.update();
-      fw.draw(ctx);
-    });
-
-    fireworks = fireworks.filter(fw => !fw.done());
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-})();
-</script>
-
+  <script src="js/countdown.js"></script>
+  <script src="js/fireworks.js"></script>
 </body>
 </html>
-
