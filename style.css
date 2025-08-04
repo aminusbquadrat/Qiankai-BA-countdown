@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #1e1e2f, #2c2c3f);
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+#countdown {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.time-box {
+  background: #3a3a5a;
+  border-radius: 20px;
+  padding: 20px 30px;
+  min-width: 120px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.time-box span {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.label {
+  font-size: 1rem;
+  color: #bbbbcc;
+  margin-top: 5px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-top: 30px;
+  color: #ccc;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .time-box {
+    min-width: 90px;
+    padding: 15px 20px;
+  }
+
+  .time-box span {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
