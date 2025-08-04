@@ -1,55 +1,41 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Qiankai's Countdown</title>
-  <style>
-    body {
-      background-color: #1c1c1c;
-      color: #ffffff;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding-top: 100px;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    #countdown {
-      font-size: 4rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.5rem;
-      margin-top: 30px;
-    }
-
-    .label {
-      color: #aaaaaa;
-      font-size: 1rem;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Qiankai's Bachelor Countdown</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h1>Qiankai hat noch</h1>
-  <div id="countdown">Lädt...</div>
+  <div id="countdown">
+    <div class="time-box">
+      <span id="days">0</span>
+      <div class="label">Tage</div>
+    </div>
+    <div class="time-box">
+      <span id="hours">0</span>
+      <div class="label">Stunden</div>
+    </div>
+    <div class="time-box">
+      <span id="minutes">0</span>
+      <div class="label">Minuten</div>
+    </div>
+    <div class="time-box">
+      <span id="seconds">0</span>
+      <div class="label">Sekunden</div>
+    </div>
+  </div>
   <p>um seine Bachelorarbeit abzugeben</p>
 
   <script>
-    const countdownElement = document.getElementById("countdown");
-
     function updateCountdown() {
       const deadline = new Date("2026-02-29T23:59:59");
       const now = new Date();
       const diff = deadline - now;
 
       if (diff <= 0) {
-        countdownElement.innerHTML = "KEINE ZEIT MEHR!";
+        document.getElementById("countdown").innerHTML = "KEINE ZEIT MEHR!";
         return;
       }
 
@@ -58,8 +44,10 @@
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      countdownElement.innerHTML =
-        `${days} Tage ${hours} Std ${minutes} Min ${seconds} Sek`;
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
     }
 
     updateCountdown();
@@ -67,3 +55,4 @@
   </script>
 </body>
 </html>
+
