@@ -1,6 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap');
 
-body {
+#fireworks {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* Keine Maus-Interaktion */
+  z-index: 0;
+  background: transparent;
+}
+
+body > *:not(#fireworks) {
+  position: relative;
+  z-index: 1;
   margin: 0;
   padding: 0;
   background: #1a1a1a; /* Dunkler Hintergrund für Eleganz */
