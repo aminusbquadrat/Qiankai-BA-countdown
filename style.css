@@ -124,7 +124,7 @@ p {
 
 /* Links: ca. 20° drehen + horizontal spiegeln */
 .side-image.left {
-  transform: rotate(20deg) scaleX(-1);
+  transform: rotate(-20deg) scaleX(-1);
 }
 
 /* Rechts: ca. 20° drehen */
