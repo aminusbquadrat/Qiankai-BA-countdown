@@ -13,7 +13,8 @@
 
 body > *:not(#fireworks) {
   position: relative;
-  z-index: 1;
+  z-index: 1;}
+body{
   margin: 0;
   padding: 0;
   background: #1a1a1a; /* Dunkler Hintergrund für Eleganz */
