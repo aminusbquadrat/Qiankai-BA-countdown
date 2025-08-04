@@ -1,46 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Qiankai BA Countdown</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Qiankai Countdown</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">Qiankai hat noch</h1>
-
-    <div class="countdown-wrapper">
-      <img src="images/qiankai.png" alt="Qiankai links" class="side-image left" />
-      
-      <div class="countdown" id="countdown">
-        <div class="time">
-          <span id="days">00</span>
-          <span class="label">Tage</span>
-        </div>
-        <div class="time">
-          <span id="hours">00</span>
-          <span class="label">Stunden</span>
-        </div>
-        <div class="time">
-          <span id="minutes">00</span>
-          <span class="label">Minuten</span>
-        </div>
-        <div class="time">
-          <span id="seconds">00</span>
-          <span class="label">Sekunden</span>
-        </div>
-      </div>
-
-      <img src="images/qiankai.png" alt="Qiankai rechts" class="side-image right" />
-    </div>
-
-    <p class="subtitle">um seine Bachelorarbeit abzugeben</p>
-  </div>
-
   <canvas id="fireworks-canvas"></canvas>
 
-  <script src="js/countdown.js"></script>
-  <script src="js/fireworks.js"></script>
+  <div class="container">
+    <img src="qiankai.png" class="side-image left" alt="Qiankai links" />
+    
+    <div class="content">
+      <div class="caption">Qiankai hat noch</div>
+      <div id="countdown" class="countdown">
+        <div class="time"><span id="days">--</span><small>Tage</small></div>
+        <div class="time"><span id="hours">--</span><small>Stunden</small></div>
+        <div class="time"><span id="minutes">--</span><small>Minuten</small></div>
+        <div class="time"><span id="seconds">--</span><small>Sekunden</small></div>
+      </div>
+      <div class="caption bottom">um seine Bachelorarbeit abzugeben</div>
+    </div>
+
+    <img src="qiankai.png" class="side-image right" alt="Qiankai rechts" />
+  </div>
+
+  <script src="countdown.js"></script>
+  <script src="fireworks.js"></script>
 </body>
 </html>
